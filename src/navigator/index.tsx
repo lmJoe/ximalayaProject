@@ -6,11 +6,13 @@ import { View, Text,Platform,StyleSheet } from 'react-native';
  */
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator,HeaderStyleInterpolators,CardStyleInterpolators, StackNavigationProp} from '@react-navigation/stack';//引用了堆栈式导航器
-import Home from '@/pages/Home';
+import BottomTabs from './BottomTabs';
 import Detail from '@/pages/Detail';
-/**声明一个叫RootStackParamList的类型并导出以便于其他文件接收到，此处的type是一个类型别名即给一个类型重新起一个名字 */
+/**声明一个叫RootStackParamList的类型，此处的type是一个类型别名即给一个类型重新起一个名字 */
 export type RootStackParamList = {
-    Home:undefined,
+    BottomTabs:{
+        screen?:string
+    },
     Detail:{
         id:number,
     },
@@ -40,7 +42,6 @@ class Navigator extends React.Component{
         return(
             <NavigationContainer>
                 <Stack.Navigator
-                headerMode="float"
                 screenOptions={{
                     headerTitleAlign:'center',
                     headerStyleInterpolator: HeaderStyleInterpolators.forUIKit,//标题跳转动画
@@ -57,10 +58,7 @@ class Navigator extends React.Component{
                         })
                     }
                 }}>
-                    <Stack.Screen options={{
-                        headerTitle:'首页'
-                        }} 
-                        name="Home" component={Home}/>
+                    <Stack.Screen name="BottomTabs" component={BottomTabs}/>
                     <Stack.Screen options={{
                         headerTitle:'详情页'
                         }}
