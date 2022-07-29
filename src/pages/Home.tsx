@@ -17,8 +17,9 @@ import { RootState } from '@/models/index';
  * 拿到store,所以从home组件中可以拿到仓库，所以connect就能知道store里面的state属性
  * state类型就是在models里index中定义的RootState的类别
 */
-const mapStateToProps = ({home}:RootState) =>({
+const mapStateToProps = ({home,loading}:RootState) =>({
     num:home.num,
+    loading:loading.effects['home/asyncAdd'],//次数的effects为models文件夹中home文件的effects对象里所有定义的方法
 })
 
 const connector = connect(mapStateToProps);
@@ -51,8 +52,19 @@ class Home extends React.Component<IProps>{
             }
         })
     } 
+    asyncAdd = () => {
+        const { dispatch } = this.props;
+        //调用到在models文件夹中home文件中的add方法
+        /**如何找到：通过 namespace+调用的函数方法名称*/
+        dispatch({
+            type:'home/asyncAdd',
+            payload:{
+                num:2,
+            }
+        })
+    } 
     render (){
-        const {num} = this.props;
+        const {num,loading} = this.props;
         /**
          * this.props;在此处使用this.props可以获取从其他组件传过来的参数
          * onPress 为点击按钮触发的时间
@@ -60,8 +72,10 @@ class Home extends React.Component<IProps>{
         return (
             <View>
                 <Text>Home{num}</Text>
+                <Text>{loading?'正在努力加载':''}</Text>
                 <Button title="跳转到详情页" onPress={this.onPress}/>
-                <Button title="加" onPress={this.handleadd}/>
+                <Button title="同步加" onPress={this.handleadd}/>
+                <Button title="异步加" onPress={this.asyncAdd}/>
             </View>
         )
     }

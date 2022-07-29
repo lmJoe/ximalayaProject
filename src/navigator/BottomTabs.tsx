@@ -6,8 +6,10 @@ import Found from '@/pages/Found';
 import Account from '@/pages/Account';
 import { RootStackNavigation,RootStackParamList } from '.';
 import { RouteProp, TabNavigationState, getFocusedRouteNameFromRoute } from '@react-navigation/native';
+import IconFont from '@/assets/iconfont';
+import HomeTabs from './HomeTabs';
 export type BottomTabParamList = {
-    Home:undefined,
+    HomeTabs:undefined,
     Listen:undefined,
     Found:undefined,
     Account:undefined,
@@ -57,10 +59,46 @@ class BottomTabs extends React.Component<IProps> {
                 screenOptions={{
                     tabBarActiveTintColor:'#f86442',
                 }}>
-                <Tab.Screen name="Home" component={Home} options={{tabBarLabel:'首页'}}/>
-                <Tab.Screen name="Listen" component={Listen} options={{tabBarLabel:'我听'}}/>
-                <Tab.Screen name="Found" component={Found} options={{tabBarLabel:'发现'}}/>
-                <Tab.Screen name="Account" component={Account} options={{tabBarLabel:'账户'}}/>
+                <Tab.Screen 
+                    name="HomeTabs" 
+                    component={HomeTabs} 
+                    options={{
+                        tabBarLabel:'首页',
+                        tabBarIcon:({color,size})=>(
+                            <IconFont name="home-two" size={size} color={color} />
+                        ),
+                    }}
+                />                
+                <Tab.Screen 
+                    name="Listen" 
+                    component={Listen} 
+                    options={{
+                        tabBarLabel:'我听',
+                        tabBarIcon:({color,size})=>(
+                            <IconFont name="music-cd" size={size} color={color} />
+                        ),
+                    }}
+                />
+                <Tab.Screen 
+                    name="Found" 
+                    component={Found} 
+                    options={{
+                        tabBarLabel:'发现',
+                        tabBarIcon:({color,size})=>(
+                            <IconFont name="music-menu" size={size} color={color} />
+                        ),
+                    }}
+                />
+                <Tab.Screen 
+                    name="Account" 
+                    component={Account} 
+                    options={{
+                        tabBarLabel:'账户',
+                        tabBarIcon:({color,size})=>(
+                            <IconFont name="avatar" size={size} color={color}/>
+                        ),
+                    }}
+                />
             </Tab.Navigator>
         )
     }

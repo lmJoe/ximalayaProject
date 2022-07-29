@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text,Platform,StyleSheet } from 'react-native';
+import { View, Text,Platform,StyleSheet, StatusBar } from 'react-native';
 /**
  * NavigationContainer 是管理整个的导航素并包含导航状态的组件
  * createStackNavigator 是一个返回包含两个属性的对象的函数
@@ -48,8 +48,9 @@ class Navigator extends React.Component{
                     cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,//页面跳转动画
                     gestureEnabled: true,//手势开启
                     gestureDirection: 'horizontal',//设置手势为左右方向
+                    headerStatusBarHeight:StatusBar.currentHeight,//状态栏的高度
                     headerStyle: {
-                        backgroundColor: "#dedede",//标题栏颜色
+                        // backgroundColor: "#dedede",//标题栏颜色
                         ...Platform.select({
                             android: {//打包android项目时起作用
                                 elevation: 0,
@@ -58,7 +59,9 @@ class Navigator extends React.Component{
                         })
                     }
                 }}>
-                    <Stack.Screen name="BottomTabs" component={BottomTabs}/>
+                    <Stack.Screen name="BottomTabs" component={BottomTabs} options={{
+                        headerTitle:'首页',
+                    }}/>
                     <Stack.Screen options={{
                         headerTitle:'详情页'
                         }}
