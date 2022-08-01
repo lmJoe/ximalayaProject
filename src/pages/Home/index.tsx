@@ -1,9 +1,10 @@
 import React from 'react';
 import { View, Text,Button } from 'react-native';
-import { RootStackNavigation } from '../navigator';
+import { RootStackNavigation } from '../../navigator';
 /**使用connect获取到models文件中home文件中定义的num */
 import { connect, ConnectedProps } from 'react-redux';
 import { RootState } from '@/models/index';
+import WCarousel from './Carousel';
 
 /**
  * connect本身是一个函数，可以接收一个函数，同时也返回一个函数，用来帮我们
@@ -76,6 +77,7 @@ class Home extends React.Component<IProps>{
                 <Button title="跳转到详情页" onPress={this.onPress}/>
                 <Button title="同步加" onPress={this.handleadd}/>
                 <Button title="异步加" onPress={this.asyncAdd}/>
+                <WCarousel />
             </View>
         )
     }
